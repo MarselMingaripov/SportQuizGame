@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SportQuiz</string>
+    <string name="game_activity">Идет Игра!</string>
 </resources>
