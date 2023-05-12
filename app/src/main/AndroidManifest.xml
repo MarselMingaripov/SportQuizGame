@@ -25,9 +25,15 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name="com.ru.min.sportquiz.GameActivity"
+        <activity android:name="com.ru.min.sportquiz.GameActivityEasy"
             android:parentActivityName=".MainActivity"
             android:label="@string/game_activity"/>
+        <activity android:name="com.ru.min.sportquiz.GameActivityHard"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/game_activity_hard"/>
+        <activity android:name="com.ru.min.sportquiz.GameActivityMedium"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/game_activity_medium"/>
     </application>
 
 </manifest>
