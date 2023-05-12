@@ -1,5 +1,6 @@
 package com.ru.min.sportquiz.database.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -22,7 +23,7 @@ public interface UserDao {
     @Query("SELECT * from users")
     List<User> getUsers();
 
-    @Query("SELECT * from users where name=:name")
+    @Query("SELECT * from users where name = :name")
     User getUserByName(String name);
 
     @Query("DELETE from users")

@@ -34,6 +34,9 @@
         <activity android:name="com.ru.min.sportquiz.GameActivityMedium"
             android:parentActivityName=".MainActivity"
             android:label="@string/game_activity_medium"/>
+        <activity android:name="com.ru.min.sportquiz.database.AddUserActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/game_activity_add"/>
     </application>
 
 </manifest>

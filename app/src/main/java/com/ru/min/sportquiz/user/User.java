@@ -1,5 +1,6 @@
 package com.ru.min.sportquiz.user;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -10,7 +11,7 @@ public class User {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    @NotNull
+    @ColumnInfo(name = "name")
     private String name;
     private int score;
 
@@ -32,7 +33,7 @@ public class User {
         return name;
     }
 
-    public void setName(@NotNull String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -42,5 +43,14 @@ public class User {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", score=" + score +
+                '}';
     }
 }

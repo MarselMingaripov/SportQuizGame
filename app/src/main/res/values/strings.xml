@@ -3,4 +3,5 @@
     <string name="game_activity">Легкий режим!</string>
     <string name="game_activity_medium">Средний режим!</string>
     <string name="game_activity_hard">Сложный режим!</string>
+    <string name="game_activity_add">Выбор игрока</string>
 </resources>
