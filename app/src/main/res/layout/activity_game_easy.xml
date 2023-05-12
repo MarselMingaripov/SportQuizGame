@@ -9,9 +9,12 @@
         android:id="@+id/textViewScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTimer"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="28dp" />
+        tools:layout_editor_absoluteY="50dp" />
 
     <Button
         android:id="@+id/buttonNext"
@@ -22,7 +25,7 @@
         android:text="Следующий вопрос"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioButton4"
         app:layout_constraintVertical_bias="0.5"
@@ -85,5 +88,17 @@
             android:layout_height="wrap_content"
             android:text="RadioButton" />
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/textViewTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="50dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
