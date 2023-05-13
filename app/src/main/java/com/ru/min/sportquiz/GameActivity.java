@@ -1,7 +1,8 @@
 package com.ru.min.sportquiz;
 
+import static com.ru.min.sportquiz.question.Level.*;
+
 import android.annotation.SuppressLint;
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -13,10 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
-import com.ru.min.sportquiz.database.AddUserActivity;
-import com.ru.min.sportquiz.database.AppDatabase;
 import com.ru.min.sportquiz.database.DatabaseClient;
 import com.ru.min.sportquiz.question.Level;
 import com.ru.min.sportquiz.question.Question;
@@ -26,15 +24,17 @@ import com.ru.min.sportquiz.user.User;
 import java.util.List;
 import java.util.Locale;
 
-public class GameActivityEasy extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
 
     private CountDownTimer mCountDownTimer;
     private long mTimeLeftInMillis;
     private TextView mTextView;
 
     private String name;
+    private String level;
+    private Level gameLevel;
 
-    private QuestionPool questionPool = new QuestionPool();
+    private final QuestionPool questionPool = new QuestionPool();
 
     private User user;
     private Button button;
@@ -45,17 +45,17 @@ public class GameActivityEasy extends AppCompatActivity {
     private RadioButton radioButton4;
 
     private TextView textViewCorrectOrNot;
+    private TextView textViewScore;
 
     public void play() {
-        //user = db.userDao().getUserByName("Marsel");
         try {
-        Question question = questionPool.getQuestion(Level.EASY);
+            Question question = questionPool.getQuestion(gameLevel);
             TextView textView = findViewById(R.id.textViewQuestion);
             textView.setText(question.getText());
 
             textViewCorrectOrNot = findViewById(R.id.textViewCorrectOrNot);
 
-            TextView textViewScore = findViewById(R.id.textViewScore);
+            textViewScore = findViewById(R.id.textViewScore);
             textViewScore.setText(user.getScore() + "");
             radioGroup = findViewById(R.id.radioGroup);
             radioButton1 = findViewById(R.id.radioButton);
@@ -78,12 +78,7 @@ public class GameActivityEasy extends AppCompatActivity {
                             radioButton4.setClickable(false);
                             if (questionPool.checkCorrectAnswer(question, radioButton1.getText().toString())) {
                                 textViewCorrectOrNot.setText("Верно!");
-                                int score = Integer.parseInt((String) textViewScore.getText());
-                                score++;
-                                user.setScore(score);
-                                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
-                                        .userDao()
-                                        .update(user);
+                                addScore(gameLevel);
                             } else {
                                 textViewCorrectOrNot.setText("Неверно!");
                             }
@@ -94,12 +89,7 @@ public class GameActivityEasy extends AppCompatActivity {
                             radioButton1.setClickable(false);
                             if (questionPool.checkCorrectAnswer(question, radioButton4.getText().toString())) {
                                 textViewCorrectOrNot.setText("Верно!");
-                                int score = Integer.parseInt((String) textViewScore.getText());
-                                score++;
-                                user.setScore(score);
-                                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
-                                        .userDao()
-                                        .update(user);
+                                addScore(gameLevel);
                             } else {
                                 textViewCorrectOrNot.setText("Неверно!");
                             }
@@ -110,12 +100,7 @@ public class GameActivityEasy extends AppCompatActivity {
                             radioButton4.setClickable(false);
                             if (questionPool.checkCorrectAnswer(question, radioButton2.getText().toString())) {
                                 textViewCorrectOrNot.setText("Верно!");
-                                int score = Integer.parseInt((String) textViewScore.getText());
-                                score++;
-                                user.setScore(score);
-                                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
-                                        .userDao()
-                                        .update(user);
+                                addScore(gameLevel);
                             } else {
                                 textViewCorrectOrNot.setText("Неверно!");
                             }
@@ -126,12 +111,7 @@ public class GameActivityEasy extends AppCompatActivity {
                             radioButton4.setClickable(false);
                             if (questionPool.checkCorrectAnswer(question, radioButton3.getText().toString())) {
                                 textViewCorrectOrNot.setText("Верно!");
-                                int score = Integer.parseInt((String) textViewScore.getText());
-                                score++;
-                                user.setScore(score);
-                                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
-                                        .userDao()
-                                        .update(user);
+                                addScore(gameLevel);
                             } else {
                                 textViewCorrectOrNot.setText("Неверно!");
                             }
@@ -140,6 +120,7 @@ public class GameActivityEasy extends AppCompatActivity {
                 }
             });
         } catch (IllegalArgumentException e) {
+            mCountDownTimer.cancel();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             Toast.makeText(getApplicationContext(), "Вы ответили на все вопросы!", Toast.LENGTH_LONG).show();
             e.printStackTrace();
@@ -198,15 +179,75 @@ public class GameActivityEasy extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mTimeLeftInMillis = 60000;
-        startTimer();
         setContentView(R.layout.activity_game_easy);
         name = getIntent().getExtras().getString("name");
+        level = getIntent().getExtras().getString("level");
+        switch (level) {
+            case "easy": {
+                gameLevel = EASY;
+                break;
+            }
+            case "medium": {
+                gameLevel = MEDIUM;
+                break;
+            }
+            case "hard": {
+                gameLevel = HARD;
+                break;
+            }
+        }
         user = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                 .userDao()
                 .getUserByName(name);
 
-            play();
+        switch (gameLevel) {
+            case EASY: {
+                mTimeLeftInMillis = 60000;
+                break;
+            }
+            case MEDIUM: {
+                mTimeLeftInMillis = 50000;
+                break;
+            }
+            case HARD: {
+                mTimeLeftInMillis = 40000;
+                break;
+            }
+        }
+        play();
+        startTimer();
+    }
 
+    private void addScore(Level level) {
+        textViewScore = findViewById(R.id.textViewScore);
+        switch (level) {
+            case EASY: {
+                int score = Integer.parseInt((String) textViewScore.getText());
+                score++;
+                user.setScore(score);
+                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                        .userDao()
+                        .update(user);
+                break;
+            }
+            case MEDIUM: {
+                int score = Integer.parseInt((String) textViewScore.getText());
+                score += 2;
+                user.setScore(score);
+                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                        .userDao()
+                        .update(user);
+                break;
+            }
+            case HARD: {
+                int score = Integer.parseInt((String) textViewScore.getText());
+                score += 3;
+                user.setScore(score);
+                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                        .userDao()
+                        .update(user);
+                break;
+            }
+        }
     }
 }

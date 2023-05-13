@@ -21,17 +21,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickStartGameMedium(View view) {
-        Intent intent = new Intent(MainActivity.this, GameActivityMedium.class);
+        Intent intent = new Intent(MainActivity.this, AddUserActivity.class);
+        intent.putExtra("com.ru.min.sportquiz.level", "GameActivityMedium");
         startActivity(intent);
     }
 
     public void onClickStartGameHard(View view) {
-        Intent intent = new Intent(MainActivity.this, GameActivityHard.class);
+        Intent intent = new Intent(MainActivity.this, AddUserActivity.class);
+        intent.putExtra("com.ru.min.sportquiz.level", "GameActivityHard");
         startActivity(intent);
     }
-
-    /*public void onClickAddName(View view) {
-        Intent intent = new Intent(MainActivity.this, AddUserActivity.class);
-        startActivity(intent);
-    }*/
 }

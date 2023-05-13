@@ -10,8 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ru.min.sportquiz.GameActivityEasy;
-import com.ru.min.sportquiz.MainActivity;
+import com.ru.min.sportquiz.GameActivity;
 import com.ru.min.sportquiz.R;
 import com.ru.min.sportquiz.user.User;
 
@@ -54,7 +53,7 @@ public class AddUserActivity extends AppCompatActivity {
                 //creating a user
                 if (DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                         .userDao()
-                        .getUserByName(NAME) != null){
+                        .getUserByName(NAME) != null) {
                     user = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                             .userDao()
                             .getUserByName(NAME);
@@ -82,12 +81,28 @@ public class AddUserActivity extends AppCompatActivity {
 
         SaveUser su = new SaveUser();
         su.execute();
-        switch (level){
-            case("GameActivityEasy"):
-                Intent intent = new Intent(AddUserActivity.this, GameActivityEasy.class);
+        switch (level) {
+            case ("GameActivityEasy"): {
+                Intent intent = new Intent(AddUserActivity.this, GameActivity.class);
                 intent.putExtra("name", NAME);
+                intent.putExtra("level", "easy");
                 startActivity(intent);
+                break;
+            }
+            case ("GameActivityMedium"): {
+                Intent intent = new Intent(AddUserActivity.this, GameActivity.class);
+                intent.putExtra("name", NAME);
+                intent.putExtra("level", "medium");
+                startActivity(intent);
+                break;
+            }
+            case ("GameActivityHard"): {
+                Intent intent = new Intent(AddUserActivity.this, GameActivity.class);
+                intent.putExtra("name", NAME);
+                intent.putExtra("level", "hard");
+                startActivity(intent);
+                break;
+            }
         }
-
     }
 }
