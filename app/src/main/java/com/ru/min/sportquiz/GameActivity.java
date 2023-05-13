@@ -14,17 +14,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.ru.min.sportquiz.database.DatabaseClient;
 import com.ru.min.sportquiz.question.Level;
 import com.ru.min.sportquiz.question.Question;
 import com.ru.min.sportquiz.question.QuestionPool;
+import com.ru.min.sportquiz.user.CurrentUser;
 import com.ru.min.sportquiz.user.User;
 
 import java.util.List;
 import java.util.Locale;
 
 public class GameActivity extends AppCompatActivity {
+
+    ConstraintLayout back;
 
     private CountDownTimer mCountDownTimer;
     private long mTimeLeftInMillis;
@@ -177,6 +181,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        back = findViewById(R.id.backGame);
         String name = getIntent().getExtras().getString("name");
         String level = getIntent().getExtras().getString("level");
         switch (level) {
@@ -211,6 +216,29 @@ public class GameActivity extends AppCompatActivity {
                 break;
             }
         }
+
+        switch (user.getActualWallpaper()){
+            case 1:{
+                back.setBackgroundResource(R.drawable.back1);
+                break;
+            }
+            case 2:{
+                back.setBackgroundResource(R.drawable.back2);
+                break;
+            }
+            case 3:{
+                back.setBackgroundResource(R.drawable.back3);
+                break;
+            }
+            case 4:{
+                back.setBackgroundResource(R.drawable.back4);
+                break;
+            }
+            case 5:{
+                back.setBackgroundResource(R.drawable.back5);
+                break;
+            }
+        }
         play();
         startTimer();
     }
@@ -225,6 +253,7 @@ public class GameActivity extends AppCompatActivity {
                 DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                         .userDao()
                         .update(user);
+                CurrentUser.getInstance().setCurrentUser(user);
                 break;
             }
             case MEDIUM: {
@@ -234,6 +263,7 @@ public class GameActivity extends AppCompatActivity {
                 DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                         .userDao()
                         .update(user);
+                CurrentUser.getInstance().setCurrentUser(user);
                 break;
             }
             case HARD: {
@@ -243,6 +273,7 @@ public class GameActivity extends AppCompatActivity {
                 DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                         .userDao()
                         .update(user);
+                CurrentUser.getInstance().setCurrentUser(user);
                 break;
             }
         }

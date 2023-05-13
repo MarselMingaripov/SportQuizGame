@@ -32,6 +32,9 @@
             android:parentActivityName=".MainActivity"
             android:label="@string/game_activity_add"/>
         <activity android:name="com.ru.min.sportquiz.ChooseLevelActivity" />
+        <activity android:name="com.ru.min.sportquiz.ShopActivity"
+            android:parentActivityName=".ChooseLevelActivity"
+            android:label="@string/game_activity_shop"/>
     </application>
 
 </manifest>
