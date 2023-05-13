@@ -6,9 +6,6 @@ import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity(tableName = "users")
 public class User {
 
@@ -18,13 +15,11 @@ public class User {
     private String name;
     private int score;
     private int actualWallpaper;
-    //private List<Integer> purchasedWallpapers;
 
     public User(String name) {
         this.name = name;
         this.score = 0;
         this.actualWallpaper = 0;
-        //this.purchasedWallpapers = new ArrayList<>();
     }
 
     public int getId() {
@@ -59,14 +54,6 @@ public class User {
     public void setActualWallpaper(int actualWallpaper) {
         this.actualWallpaper = actualWallpaper;
     }
-
-    /*public List<Integer> getPurchasedWallpapers() {
-        return purchasedWallpapers;
-    }
-
-    public void setPurchasedWallpapers(List<Integer> purchasedWallpapers) {
-        this.purchasedWallpapers = purchasedWallpapers;
-    }*/
 
     @Override
     public String toString() {

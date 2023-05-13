@@ -1,15 +1,15 @@
-package com.ru.min.sportquiz;
+package com.ru.min.sportquiz.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.ru.min.sportquiz.R;
 import com.ru.min.sportquiz.database.DatabaseClient;
 import com.ru.min.sportquiz.user.CurrentUser;
 import com.ru.min.sportquiz.user.User;
@@ -53,8 +53,6 @@ public class ChooseLevelActivity extends AppCompatActivity {
                 break;
             }
         }
-        //setContentView(R.layout.activity_main);
-        //name = getIntent().getExtras().getString("name");
         name = user.getName();
         textViewScore = findViewById(R.id.textViewScore);
         textViewScore.setText(user.getScore() + "");

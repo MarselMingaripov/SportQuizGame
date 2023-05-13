@@ -1,4 +1,4 @@
-package com.ru.min.sportquiz;
+package com.ru.min.sportquiz.activity;
 
 import static com.ru.min.sportquiz.question.Level.*;
 
@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.ru.min.sportquiz.R;
 import com.ru.min.sportquiz.database.DatabaseClient;
 import com.ru.min.sportquiz.question.Level;
 import com.ru.min.sportquiz.question.Question;

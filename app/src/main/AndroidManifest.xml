@@ -13,7 +13,7 @@
         android:theme="@style/Theme.SportQuiz"
         tools:targetApi="31" >
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,15 +25,15 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name="com.ru.min.sportquiz.GameActivity"
-            android:parentActivityName=".MainActivity"
+        <activity android:name="com.ru.min.sportquiz.activity.GameActivity"
+            android:parentActivityName=".activity.MainActivity"
             android:label="@string/game_activity"/>
         <activity android:name="com.ru.min.sportquiz.database.AddUserActivity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activity.MainActivity"
             android:label="@string/game_activity_add"/>
-        <activity android:name="com.ru.min.sportquiz.ChooseLevelActivity" />
-        <activity android:name="com.ru.min.sportquiz.ShopActivity"
-            android:parentActivityName=".ChooseLevelActivity"
+        <activity android:name="com.ru.min.sportquiz.activity.ChooseLevelActivity" />
+        <activity android:name="com.ru.min.sportquiz.activity.ShopActivity"
+            android:parentActivityName=".activity.ChooseLevelActivity"
             android:label="@string/game_activity_shop"/>
     </application>
 

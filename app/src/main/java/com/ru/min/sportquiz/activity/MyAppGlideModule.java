@@ -1,4 +1,4 @@
-package com.ru.min.sportquiz;
+package com.ru.min.sportquiz.activity;
 
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;

@@ -3,7 +3,6 @@ package com.ru.min.sportquiz.question;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class QuestionPool {
@@ -48,10 +47,6 @@ public class QuestionPool {
         } else {
             throw new IllegalArgumentException("Вопросы закончились!");
         }
-    }
-
-    public void restartQuestions(){
-        questions.stream().forEach(x -> x.setStatus(Status.NOT_SHOWED));
     }
 
     public boolean checkCorrectAnswer(Question question, String answer){
