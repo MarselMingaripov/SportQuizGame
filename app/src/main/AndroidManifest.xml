@@ -31,6 +31,7 @@
         <activity android:name="com.ru.min.sportquiz.database.AddUserActivity"
             android:parentActivityName=".MainActivity"
             android:label="@string/game_activity_add"/>
+        <activity android:name="com.ru.min.sportquiz.ChooseLevelActivity" />
     </application>
 
 </manifest>

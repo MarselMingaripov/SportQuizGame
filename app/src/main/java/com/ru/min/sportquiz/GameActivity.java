@@ -28,16 +28,12 @@ public class GameActivity extends AppCompatActivity {
 
     private CountDownTimer mCountDownTimer;
     private long mTimeLeftInMillis;
-    private TextView mTextView;
 
-    private String name;
-    private String level;
     private Level gameLevel;
 
     private final QuestionPool questionPool = new QuestionPool();
 
     private User user;
-    private Button button;
     private RadioGroup radioGroup;
     private RadioButton radioButton1;
     private RadioButton radioButton2;
@@ -67,8 +63,9 @@ public class GameActivity extends AppCompatActivity {
             radioButton4 = findViewById(R.id.radioButton4);
             radioButton4.setText(question.getWrongAnswerFour());
 
-            button = findViewById(R.id.buttonNext);
+            Button button = findViewById(R.id.buttonNext);
             radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @SuppressLint("NonConstantResourceId")
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
                     switch (checkedId) {
@@ -137,7 +134,7 @@ public class GameActivity extends AppCompatActivity {
         List<User> users = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                 .userDao()
                 .getUsers();
-        users.stream().forEach(System.out::println);
+        users.forEach(System.out::println);
         play();
 
     }
@@ -163,7 +160,7 @@ public class GameActivity extends AppCompatActivity {
         int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
 
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
-        mTextView = findViewById(R.id.textViewTimer);
+        TextView mTextView = findViewById(R.id.textViewTimer);
         mTextView.setText(timeLeftFormatted);
     }
 
@@ -179,9 +176,9 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_easy);
-        name = getIntent().getExtras().getString("name");
-        level = getIntent().getExtras().getString("level");
+        setContentView(R.layout.activity_game);
+        String name = getIntent().getExtras().getString("name");
+        String level = getIntent().getExtras().getString("level");
         switch (level) {
             case "easy": {
                 gameLevel = EASY;

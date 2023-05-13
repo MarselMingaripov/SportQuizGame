@@ -1,4 +1,4 @@
-package com.ru.min.sportquiz.user;
+package com.ru.min.sportquiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
