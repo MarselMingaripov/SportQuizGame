@@ -3,6 +3,7 @@ package com.ru.min.sportquiz.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -28,9 +29,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose_level);
         back = findViewById(R.id.back);
         User user = CurrentUser.getInstance().getCurrentUser();
-        System.out.println(DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+        Log.i("qwe", DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                 .userDao()
-                .getUserByName(CurrentUser.getInstance().getCurrentUser().getName()));
+                .getUserByName(CurrentUser.getInstance().getCurrentUser().getName()).toString());
         switch (user.getActualWallpaper()){
             case 1:{
                 back.setBackgroundResource(R.drawable.back1);
